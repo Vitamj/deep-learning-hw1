@@ -1,14 +1,16 @@
 # Deep Learning — HW1
 
-The assignment solution is in `hw1.ipynb`. It implements the required convolution, normalization, optimizer, CIFAR-10 ResNet, targeted attack, and Fashion-MNIST adversarial-training tasks. The selected option is `ATTACK_TRACK = 'targeted'`; optional bonus tasks are disabled.
+Решение находится в `hw1_executed.ipynb`: ноутбук выполнен целиком, графики и выводы сохранены. Исходный `hw1.ipynb` оставлен без сохранённых runtime-выводов. Реализованы свёртка и backward, BatchNorm, слияние Conv-BN, MyAdamW, cosine schedule, ResNet для CIFAR-10, атаки и adversarial training для Fashion-MNIST. Выбран вариант `ATTACK_TRACK = 'targeted'`; дополнительные бонусы не включены.
 
-## Run
+## Запуск
 
 ```bash
 python -m pip install -r requirements.txt
 jupyter notebook hw1.ipynb
 ```
 
-Keep `FAST_MODE = False` for the full run. On the first run, the notebook downloads CIFAR-10 and Fashion-MNIST Parquet files into `data/`; it writes metrics and model state dictionaries to `artifacts/` at the end. The tests and experiments run on CPU if CUDA or Apple MPS is unavailable.
+Оставьте `FAST_MODE = False` для полного прогона. При первом запуске датасеты CIFAR-10 и Fashion-MNIST загружаются в `data/`; метрики и веса сохраняются в `artifacts/`. Нужен доступ в интернет для загрузки датасетов. Полный прогон выполнялся на Apple MPS.
 
-The image datasets are standard CIFAR-10 and Fashion-MNIST splits, served in Parquet format from public Hugging Face dataset repositories: [CIFAR-10](https://huggingface.co/datasets/uoft-cs/cifar10) and [Fashion-MNIST](https://huggingface.co/datasets/anonyme449/fashion_mnist).
+В этом запуске ResNet-20 получил test accuracy 0.8349 после 20 эпох. PGD adversarial training за заданные 5 эпох показал низкую clean accuracy (0.1400) и низкую точность под атакой; это ограничение эксперимента явно разобрано в ноутбуке.
+
+Данные — стандартные разбиения CIFAR-10 и Fashion-MNIST в Parquet: [CIFAR-10](https://huggingface.co/datasets/uoft-cs/cifar10), [Fashion-MNIST](https://huggingface.co/datasets/anonyme449/fashion_mnist).
